@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  GUEST
+  FREE
+  PREMIUM
+  ADMIN
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum QuestionType {
+  READING
+  LISTENING
+}
+
+model User {
+  id               String        @id @default(cuid())
+  email            String?       @unique
+  passwordHash     String?
+  name             String?
+  role             Role          @default(FREE)
+  xp               Int           @default(0)
+  level            Int           @default(1)
+  streak           Int           @default(0)
+  subscriptionEnd  DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  results          Result[]
+  transactions     Transaction[]
+}
+
+model Question {
+  id            String       @id @default(cuid())
+  type          QuestionType
+  content       String
+  audioUrl      String?      // For listening questions
+  imageUrl      String?      // For questions with images
+  options       String[]     // Array of options
+  correctAnswer Int          // Index of correct option
+  explanation   String?
+  quizzes       Quiz[]       @relation("QuizToQuestion")
+}
+
+model Quiz {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  type        String     // e.g., "TOPIK", "EPS-TOPIK"
+  questions   Question[] @relation("QuizToQuestion")
+  results     Result[]
+  createdAt   DateTime   @default(now())
+}
+
+model Result {
+  id        String   @id @default(cuid())
+  userId    String
+  quizId    String
+  score     Int
+  total     Int
+  analysis  Json?    // Stores detailed analysis (Vocabulary, Grammar, etc.)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+}
+
+model Transaction {
+  id         String        @id // Invoice ID from Doku
+  userId     String
+  amount     Int
+  status     PaymentStatus @default(PENDING)
+  paymentUrl String?       // Doku Checkout URL
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  user       User          @relation(fields: [userId], references: [id])
+}
+
+model Materi {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  category    String
+  isPremium   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Kosakata {
+  id          String   @id @default(cuid())
+  korean      String
+  meaning     String
+  category    String
+  exampleSent String?  // Contoh kalimat
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Blog {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  content         String
+  metaTitle       String?
+  metaDescription String?
+  category        String?
+  author          String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

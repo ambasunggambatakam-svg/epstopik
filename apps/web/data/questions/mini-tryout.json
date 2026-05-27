@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "question": "다음 중 '사과'의 뜻은 무엇입니까?",
+    "options": ["Jeruk", "Apel", "Pisang", "Anggur"],
+    "answer": 1,
+    "category": "vocabulary",
+    "difficulty": "easy",
+    "explanation": "'사과' (sagwa) berarti 'apel' dalam bahasa Korea."
+  },
+  {
+    "id": 2,
+    "question": "빈칸에 알맞은 것을 고르십시오: 저는 학생___.",
+    "options": ["이에요", "입니다", "있습니다", "합니다"],
+    "answer": 1,
+    "category": "grammar",
+    "difficulty": "easy",
+    "explanation": "'입니다' adalah bentuk formal dari 'adalah'. 저는 학생입니다 = Saya adalah mahasiswa."
+  },
+  {
+    "id": 3,
+    "question": "'회사원'의 뜻은 무엇입니까?",
+    "options": ["Guru", "Dokter", "Karyawan perusahaan", "Mahasiswa"],
+    "answer": 2,
+    "category": "vocabulary",
+    "difficulty": "easy",
+    "explanation": "'회사원' (hoesawon) berarti 'karyawan perusahaan'."
+  },
+  {
+    "id": 4,
+    "question": "빈칸에 알맞은 것을 고르십시오: 오늘 날씨___ 좋습니다.",
+    "options": ["을", "는", "가", "에"],
+    "answer": 2,
+    "category": "grammar",
+    "difficulty": "medium",
+    "explanation": "'가' adalah partikel subjek yang digunakan setelah kata berakhiran vokal. 날씨가 좋습니다 = Cuacanya bagus."
+  },
+  {
+    "id": 5,
+    "question": "다음 중 교통수단이 아닌 것은?",
+    "options": ["버스", "지하철", "냉장고", "택시"],
+    "answer": 2,
+    "category": "vocabulary",
+    "difficulty": "easy",
+    "explanation": "'냉장고' (naengjanggo) berarti 'kulkas', bukan alat transportasi."
+  },
+  {
+    "id": 6,
+    "question": "빈칸에 알맞은 것을 고르십시오: 어제 영화___ 봤습니다.",
+    "options": ["이", "을", "는", "에서"],
+    "answer": 1,
+    "category": "grammar",
+    "difficulty": "medium",
+    "explanation": "'을' adalah partikel objek yang digunakan setelah kata berakhiran konsonan. 영화를 봤습니다 = Menonton film."
+  },
+  {
+    "id": 7,
+    "question": "'병원'은 어디입니까?",
+    "options": ["Sekolah", "Kantor pos", "Rumah sakit", "Bank"],
+    "answer": 2,
+    "category": "vocabulary",
+    "difficulty": "easy",
+    "explanation": "'병원' (byeongwon) berarti 'rumah sakit'."
+  },
+  {
+    "id": 8,
+    "question": "다음 대화의 빈칸에 알맞은 것은? A: 이름이 뭐예요? B: ___",
+    "options": [
+      "네, 감사합니다",
+      "저는 인도네시아 사람입니다",
+      "제 이름은 부디입니다",
+      "안녕하세요"
+    ],
+    "answer": 2,
+    "category": "reading",
+    "difficulty": "easy",
+    "explanation": "Pertanyaan 'Siapa namamu?' dijawab dengan '제 이름은 부디입니다' (Nama saya Budi)."
+  },
+  {
+    "id": 9,
+    "question": "빈칸에 알맞은 것을 고르십시오: 한국___ 가고 싶습니다.",
+    "options": ["을", "에서", "에", "는"],
+    "answer": 2,
+    "category": "grammar",
+    "difficulty": "medium",
+    "explanation": "'에' digunakan untuk menunjukkan arah/tujuan. 한국에 가고 싶습니다 = Ingin pergi ke Korea."
+  },
+  {
+    "id": 10,
+    "question": "'안전모'는 공장에서 왜 써야 합니까?",
+    "options": [
+      "멋있으니까",
+      "규칙이니까",
+      "머리를 보호하려고",
+      "추우니까"
+    ],
+    "answer": 2,
+    "category": "reading",
+    "difficulty": "hard",
+    "explanation": "'안전모' (helm keselamatan) dipakai untuk melindungi kepala (머리를 보호하려고) di pabrik."
+  }
+]

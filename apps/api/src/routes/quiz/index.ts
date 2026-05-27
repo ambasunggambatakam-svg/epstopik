@@ -37,7 +37,7 @@ const quizRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     }
 
     // Hide answers from clients to prevent cheating, unless they are admin (simplified for MVP)
-    const secureQuestions = quiz.questions.map(q => {
+    const secureQuestions = quiz.questions.map((q: any) => {
       const { correctAnswer, explanation, ...safeQuestion } = q
       return safeQuestion
     })

@@ -316,8 +316,8 @@ export default function AdminBlogPage() {
                       <div className="bg-white rounded-xl overflow-hidden border border-gray-300">
                         <ReactQuill 
                           theme="snow"
-                          value={newBlog.content}
-                          onChange={(val) => setNewBlog({...newBlog, content: val})}
+                          value={newData.content}
+                          onChange={(val) => setNewData({...newData, content: val})}
                           modules={quillModules}
                           className="h-64 sm:h-96"
                         />

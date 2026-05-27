@@ -11,6 +11,7 @@ const navItems = [
   { label: "Latihan Soal", href: "/latihan-soal" },
   { label: "Simulasi Ujian", href: "/simulasi-ujian" },
   { label: "Tryout", href: "/tryout" },
+  { label: "Artikel", href: "/artikel" },
   { label: "Harga", href: "#pricing" },
 ];
 

@@ -15,7 +15,7 @@ import {
   FileQuestion,
   Languages
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const sidebarLinks = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
@@ -31,6 +31,22 @@ const sidebarLinks = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
+  useEffect(() => {
+    import("../../lib/auth").then(({ getCurrentUser }) => {
+      const user = getCurrentUser();
+      if (!user || user.role !== 'ADMIN') {
+        window.location.href = "/";
+      } else {
+        setIsAuthorized(true);
+      }
+    });
+  }, []);
+
+  if (!isAuthorized) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="animate-pulse flex items-center gap-2"><div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" /> Memeriksa akses...</div></div>;
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50">

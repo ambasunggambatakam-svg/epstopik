@@ -57,7 +57,10 @@ model Quiz {
   id          String     @id @default(cuid())
   title       String
   description String?
-  type        String     // e.g., "TOPIK", "EPS-TOPIK"
+  type        String     // e.g., "MINI", "FULL"
+  duration    Int        @default(60) // minutes
+  isPremium   Boolean    @default(false)
+  status      String     @default("Draft")
   questions   Question[] @relation("QuizToQuestion")
   results     Result[]
   createdAt   DateTime   @default(now())
@@ -91,6 +94,7 @@ model Materi {
   title       String
   content     String
   category    String
+  fileUrl     String?  // Untuk link dokumen/video eksternal
   isPremium   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -111,6 +115,7 @@ model Blog {
   title           String
   slug            String   @unique
   content         String
+  imageUrl        String?  // Sampul artikel
   metaTitle       String?
   metaDescription String?
   category        String?

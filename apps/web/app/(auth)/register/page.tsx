@@ -40,8 +40,12 @@ export default function RegisterPage() {
       // Store token
       localStorage.setItem('epstopik_token', res.token);
       
-      // Redirect to dashboard
-      router.push('/dashboard');
+      // Redirect to dashboard or admin
+      if (res.user?.role === 'ADMIN') {
+        router.push('/admin');
+      } else {
+        router.push('/dashboard');
+      }
       router.refresh();
     } catch (err: any) {
       setError(err.message || "Gagal melakukan registrasi");

@@ -46,8 +46,8 @@ export function Badge({
   return (
     <span
       className={`
-        inline-flex items-center gap-1.5 font-semibold rounded-full border
-        ${config.bg} ${config.text} ${config.border} ${sizeMap[size]}
+        inline-flex items-center gap-1.5 font-semibold rounded-full
+        ${config.bg} ${config.text} ${sizeMap[size]}
         ${animated ? "animate-badge-pop" : ""}
         ${className}
       `}

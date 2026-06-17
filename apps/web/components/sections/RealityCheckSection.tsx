@@ -1,21 +1,33 @@
+import { Button } from "@repo/ui/button";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+
 export function RealityCheckSection() {
   return (
-    <section className="space-section bg-gradient-to-b from-gray-50 to-white">
-      <div className="container px-4 md:px-6 max-w-xl mx-auto text-center space-y-6">
-        <p className="text-xl md:text-2xl font-bold font-heading leading-relaxed text-foreground">
-          Sebagian besar peserta merasa persiapannya sudah cukup untuk
-          menghadapi EPS-TOPIK.
-        </p>
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Soft background accents */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-50/50 rounded-full blur-3xl -z-10" />
 
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          Namun, hasil ujian tidak selalu sesuai dengan perkiraan mereka.
+      <div className="container px-4 md:px-6 max-w-3xl mx-auto text-center space-y-8 relative z-10">
+        <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-bold uppercase tracking-widest mb-2">
+          Coba Sekarang
+        </div>
+        
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading text-gray-900 tracking-tight leading-tight">
+          Cek Kesiapan Kamu Sekarang
+        </h2>
+        
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto font-medium">
+          Jangan hanya menebak-nebak, lihat langsung apakah kamu sudah siap menghadapi ujian EPS-TOPIK.
         </p>
-
-        <div className="inline-block px-6 py-4 rounded-2xl bg-blue-50 border border-blue-100">
-          <p className="text-primary font-semibold text-base md:text-lg">
-            👉 Perbedaannya sering kali ada pada pengalaman mencoba soal dengan
-            format ujian sebenarnya.
-          </p>
+        
+        <div className="pt-6">
+          <Button size="xl" className="shadow-xl shadow-blue-600/20 text-lg px-10 py-6 rounded-full hover:scale-105 transition-transform" asChild>
+            <Link href="/tryout">
+              Cek Sekarang Juga <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

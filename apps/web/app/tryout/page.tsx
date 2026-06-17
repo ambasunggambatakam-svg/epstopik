@@ -2,6 +2,7 @@
 
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { PricingCard } from "../../components/PricingCard";
 import { QuizEngine } from "../../components/QuizEngine";
 import type { Question } from "../../components/QuizEngine";
 import questionsData from "../../data/questions/mini-tryout.json";
@@ -53,6 +54,19 @@ export default function TryoutPage() {
                 atau sudah dalam tahap persiapan ujian EPS-TOPIK untuk program
                 kerja ke Korea Selatan.
               </p>
+            </div>
+          </div>
+          {/* Pricing Section */}
+          <div id="pricing" className="max-w-4xl mx-auto mt-20 pb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-extrabold font-heading mb-4">Pilih Paket Belajar</h2>
+              <p className="text-muted-foreground max-w-lg mx-auto">
+                Tingkatkan peluang lulus ujian EPS-TOPIK dengan fitur premium. Bebas pilih paket sesuai kebutuhanmu.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <PricingCard plan="free" />
+              <PricingCard plan="premium" highlighted={true} />
             </div>
           </div>
         </div>

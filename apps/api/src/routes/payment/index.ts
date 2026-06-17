@@ -1,14 +1,12 @@
 import { FastifyPluginAsync } from 'fastify'
 import { z } from 'zod'
-import crypto from 'crypto'
-
-const paymentRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const paymentRoutes: FastifyPluginAsync = async (fastify): Promise<void> => {
   
   // Helper to generate Invoice ID
   const generateInvoiceId = () => `INV-${Date.now()}-${Math.floor(Math.random() * 1000)}`
 
   // POST /api/payments/checkout
-  fastify.post('/checkout', async function (request, reply) {
+  fastify.post('/checkout', async function (request) {
     const bodySchema = z.object({
       email: z.string().email(),
       planId: z.string(), // e.g., 'premium'

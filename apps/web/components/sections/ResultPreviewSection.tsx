@@ -1,86 +1,89 @@
 "use client";
 
-import { Badge } from "../Badge";
-import { ProgressBar } from "../ProgressBar";
-import { AnimatedCounter } from "../AnimatedCounter";
-import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { CheckCircle2, XCircle } from "lucide-react";
+import Link from "next/link";
 
 export function ResultPreviewSection() {
   return (
-    <section className="space-section bg-white">
-      <div className="container px-4 md:px-6">
-        <div className="max-w-xl mx-auto space-y-8">
-          <div className="text-center space-y-3">
-            <p className="text-sm font-bold uppercase tracking-wider text-primary">
-              Contoh Hasil
-            </p>
-            <h2 className="text-2xl md:text-3xl font-extrabold font-heading tracking-tight">
-              Hasil yang Akan Kamu Dapatkan
-            </h2>
-            <p className="text-muted-foreground">
-              Setelah mini tryout, kamu akan langsung melihat posisi kemampuan
-              kamu secara jelas.
-            </p>
+    <section className="py-24 bg-white relative">
+      <div className="container px-4 md:px-6 max-w-5xl mx-auto">
+        <div className="text-center space-y-4 mb-16">
+          <p className="text-blue-600 font-bold uppercase tracking-widest text-sm">
+            Contoh Hasil
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading text-gray-900 tracking-tight">
+            Hasil yang Akan Kamu Dapatkan
+          </h2>
+          <p className="text-gray-600 text-lg font-medium max-w-2xl mx-auto">
+            Setelah mini tryout, kamu akan langsung melihat posisi kemampuan kamu secara jelas.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          {/* Column 1: Score & Progress */}
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 flex flex-col items-center justify-center text-center space-y-8">
+            <h3 className="text-gray-500 font-bold uppercase tracking-widest text-sm">
+              📊 Skor Simulasi
+            </h3>
+            
+            <div className="relative inline-flex items-center justify-center">
+              {/* Circular progress background */}
+              <svg className="w-48 h-48 transform -rotate-90">
+                <circle className="text-gray-100" strokeWidth="12" stroke="currentColor" fill="transparent" r="88" cx="96" cy="96" />
+                <circle className="text-blue-600" strokeWidth="12" strokeDasharray="552.92" strokeDashoffset="221.16" strokeLinecap="round" stroke="currentColor" fill="transparent" r="88" cx="96" cy="96" />
+              </svg>
+              {/* Text inside circle */}
+              <div className="absolute flex flex-col items-center justify-center">
+                <span className="text-6xl font-extrabold font-heading text-blue-600">6</span>
+                <span className="text-xl font-bold text-gray-400 border-t-2 border-gray-100 pt-1 mt-1 w-16">10</span>
+              </div>
+            </div>
+
+            <div className="bg-amber-50 text-amber-600 px-6 py-2 rounded-full font-bold text-sm border border-amber-200">
+              Menengah (Intermediate)
+            </div>
           </div>
 
-          {/* Result Card Mockup */}
-          <div className="bg-white rounded-2xl border-2 border-gray-100 shadow-xl p-8 space-y-6">
-            {/* Score */}
-            <div className="text-center space-y-3">
-              <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
-                📊 Skor Simulasi
-              </p>
-              <div className="text-5xl font-extrabold font-heading text-primary">
-                <AnimatedCounter target={6} />
-                <span className="text-2xl text-muted-foreground font-normal">
-                  {" "}
-                  / 10
+          {/* Column 2: Analysis & Prediction */}
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 flex flex-col justify-center space-y-8">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                <span className="flex items-center gap-3 font-semibold text-gray-800">
+                  <CheckCircle2 className="h-6 w-6 text-green-500" /> Vocabulary
                 </span>
+                <span className="font-bold text-gray-900 bg-white px-4 py-1.5 rounded-full shadow-sm">Lumayan</span>
               </div>
-              <Badge level="intermediate" size="lg" animated />
-            </div>
-
-            {/* Progress */}
-            <ProgressBar
-              value={60}
-              size="lg"
-              color="warning"
-              label="Progress"
-              showLabel
-            />
-
-            {/* Analysis */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50">
-                <span className="flex items-center gap-2 text-sm font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-success" /> Vocabulary
+              <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                <span className="flex items-center gap-3 font-semibold text-gray-800">
+                  <XCircle className="h-6 w-6 text-red-500" /> Grammar
                 </span>
-                <span className="text-sm font-bold text-success">Cukup</span>
+                <span className="font-bold text-gray-900 bg-white px-4 py-1.5 rounded-full shadow-sm">Lemah</span>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50">
-                <span className="flex items-center gap-2 text-sm font-medium">
-                  <XCircle className="h-4 w-4 text-destructive" /> Grammar
+              <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                <span className="flex items-center gap-3 font-semibold text-gray-800">
+                  <XCircle className="h-6 w-6 text-red-500" /> Listening
                 </span>
-                <span className="text-sm font-bold text-destructive">
-                  Perlu perbaikan
-                </span>
-              </div>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50">
-                <span className="flex items-center gap-2 text-sm font-medium">
-                  <AlertTriangle className="h-4 w-4 text-warning" /> Listening
-                </span>
-                <span className="text-sm font-bold text-warning">
-                  Masih lemah
-                </span>
+                <span className="font-bold text-gray-900 bg-white px-4 py-1.5 rounded-full shadow-sm">Perlu latihan</span>
               </div>
             </div>
 
-            {/* Prediction */}
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-center">
-              <p className="text-sm text-amber-800 font-medium">
-                📉 Estimasi kesiapan lulus:{" "}
-                <span className="font-bold">±50%</span>
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+              <p className="text-gray-800 font-semibold text-center leading-relaxed">
+                Kamu sudah punya dasar, tapi belum cukup untuk lulus EPS-TOPIK.
               </p>
+            </div>
+
+            <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 text-center space-y-5">
+              <h4 className="font-bold text-gray-900 text-lg">
+                🔥 Mau tahu peluang kamu lulus?
+              </h4>
+              <Link 
+                href="https://wa.me/xxxxxxxxxx" 
+                target="_blank"
+                className="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-green-500/30 transition-all hover:-translate-y-1 w-full"
+              >
+                <span className="text-xl">👉</span> Gabung WhatsApp Channel
+              </Link>
             </div>
           </div>
         </div>

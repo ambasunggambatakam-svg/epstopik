@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify'
 
-const userRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const userRoutes: FastifyPluginAsync = async (fastify): Promise<void> => {
   
   // Middleware to ensure user is authenticated
   fastify.addHook('onRequest', async (request, reply) => {
@@ -38,7 +38,7 @@ const userRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   })
 
   // GET /api/user/history
-  fastify.get('/history', async function (request, reply) {
+  fastify.get('/history', async function (request) {
     const userId = request.user.id
 
     const history = await fastify.prisma.result.findMany({
@@ -55,7 +55,7 @@ const userRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   })
 
   // GET /api/user/leaderboard
-  fastify.get('/leaderboard', async function (request, reply) {
+  fastify.get('/leaderboard', async function () {
     const leaderboard = await fastify.prisma.user.findMany({
       take: 10,
       orderBy: { xp: 'desc' },

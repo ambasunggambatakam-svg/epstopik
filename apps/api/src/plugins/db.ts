@@ -1,6 +1,7 @@
 import fp from 'fastify-plugin'
 import { PrismaClient } from '@prisma/client'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface DbPluginOptions {
   // Specify Support plugin options here
 }
@@ -13,7 +14,7 @@ declare module 'fastify' {
   }
 }
 
-export default fp<DbPluginOptions>(async (fastify, opts) => {
+export default fp<DbPluginOptions>(async (fastify) => {
   const prisma = new PrismaClient()
   await prisma.$connect()
 

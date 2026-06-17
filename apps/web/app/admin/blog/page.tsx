@@ -32,6 +32,10 @@ type Blog = {
   imageUrl?: string;
   category?: string;
   author?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  keyword?: string;
+  canonicalUrl?: string;
   createdAt: string;
 };
 
@@ -50,7 +54,11 @@ export default function AdminBlogPage() {
     content: "",
     imageUrl: "",
     category: "",
-    author: ""
+    author: "",
+    metaTitle: "",
+    metaDescription: "",
+    keyword: "",
+    canonicalUrl: ""
   });
 
   useEffect(() => {
@@ -111,7 +119,7 @@ export default function AdminBlogPage() {
 
   const openAddModal = () => {
     setEditingId(null);
-    setNewData({ title: "", slug: "", content: "", imageUrl: "", category: "", author: "Admin EPSTOPIK" });
+    setNewData({ title: "", slug: "", content: "", imageUrl: "", category: "", author: "Admin EPSTOPIK", metaTitle: "", metaDescription: "", keyword: "", canonicalUrl: "" });
     setIsAdding(true);
   };
 
@@ -123,7 +131,11 @@ export default function AdminBlogPage() {
       content: b.content,
       imageUrl: b.imageUrl || "",
       category: b.category || "",
-      author: b.author || ""
+      author: b.author || "",
+      metaTitle: b.metaTitle || "",
+      metaDescription: b.metaDescription || "",
+      keyword: b.keyword || "",
+      canonicalUrl: b.canonicalUrl || ""
     });
     setIsAdding(true);
   };
@@ -154,17 +166,18 @@ export default function AdminBlogPage() {
           </div>
         )}
 
-        <div className="bg-white rounded-2xl border shadow-sm">
-          <div className="p-4 border-b flex flex-col sm:flex-row gap-4 justify-between items-center bg-gray-50/50 rounded-t-2xl">
-            <div className="relative w-full sm:max-w-xs">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input 
-                type="text"
-                placeholder="Cari judul artikel..."
-                className="w-full pl-9 pr-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-              />
+        {!isAdding && (
+          <div className="bg-white rounded-2xl border shadow-sm">
+            <div className="p-4 border-b flex flex-col sm:flex-row gap-4 justify-between items-center bg-gray-50/50 rounded-t-2xl">
+              <div className="relative w-full sm:max-w-xs">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input 
+                  type="text"
+                  placeholder="Cari judul artikel..."
+                  className="w-full pl-9 pr-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                />
+              </div>
             </div>
-          </div>
 
           <div className="overflow-x-auto">
             {loading ? (
@@ -221,14 +234,14 @@ export default function AdminBlogPage() {
               </table>
             )}
           </div>
-        </div>
+          </div>
+        )}
       </div>
 
-      {/* Add Modal */}
+      {/* Editor (Flat Layout) */}
       {isAdding && (
-        <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="flex min-h-full items-center justify-center p-4">
-            <div className="bg-white rounded-2xl w-full max-w-4xl flex flex-col shadow-2xl border overflow-hidden">
+        <div className="mt-6 animate-fade-in">
+          <div className="bg-white rounded-2xl w-full flex flex-col shadow-sm border overflow-hidden">
               <div className="px-6 py-4 border-b flex justify-between items-center bg-gray-50/50 sticky top-0 z-10">
                 <h2 className="text-xl font-bold font-heading text-gray-900">
                   {editingId ? 'Edit Artikel' : 'Tulis Artikel Baru'}
@@ -299,6 +312,48 @@ export default function AdminBlogPage() {
                       </div>
 
                       <div className="space-y-1.5 md:col-span-2">
+                        <label className="text-sm font-semibold text-gray-700 flex justify-between">
+                          <span>Canonical Link / Gambar</span>
+                        </label>
+                        <input 
+                          className="w-full p-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                          placeholder="https://..."
+                          value={newData.canonicalUrl}
+                          onChange={(e) => setNewData({...newData, canonicalUrl: e.target.value})}
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-semibold text-gray-700">Meta Title</label>
+                        <input 
+                          className="w-full p-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                          placeholder="Meta Title"
+                          value={newData.metaTitle}
+                          onChange={(e) => setNewData({...newData, metaTitle: e.target.value})}
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-semibold text-gray-700">Meta Deskripsi</label>
+                        <input 
+                          className="w-full p-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                          placeholder="Meta Deskripsi"
+                          value={newData.metaDescription}
+                          onChange={(e) => setNewData({...newData, metaDescription: e.target.value})}
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-semibold text-gray-700">Keyword</label>
+                        <input 
+                          className="w-full p-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                          placeholder="Keyword, dipisah koma"
+                          value={newData.keyword}
+                          onChange={(e) => setNewData({...newData, keyword: e.target.value})}
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
                         <label className="text-sm font-semibold text-gray-700">Kategori</label>
                         <input 
                           className="w-full p-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"

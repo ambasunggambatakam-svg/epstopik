@@ -1,10 +1,10 @@
 import { FastifyPluginAsync } from 'fastify'
 import { z } from 'zod'
 
-const quizRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const quizRoutes: FastifyPluginAsync = async (fastify): Promise<void> => {
   
   // GET /api/quizzes -> List all tryouts
-  fastify.get('/', async function (request, reply) {
+  fastify.get('/', async function () {
     const quizzes = await fastify.prisma.quiz.findMany({
       select: {
         id: true,
@@ -37,7 +37,9 @@ const quizRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     }
 
     // Hide answers from clients to prevent cheating, unless they are admin (simplified for MVP)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const secureQuestions = quiz.questions.map((q: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { correctAnswer, explanation, ...safeQuestion } = q
       return safeQuestion
     })
@@ -46,7 +48,7 @@ const quizRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   })
 
   // POST /api/results -> Save tryout score
-  fastify.post('/results', async function (request, reply) {
+  fastify.post('/results', async function (request) {
     const bodySchema = z.object({
       quizId: z.string(),
       score: z.number(),

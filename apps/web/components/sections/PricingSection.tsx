@@ -18,9 +18,13 @@ export function PricingSection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <PricingCard plan="free" />
-            <PricingCard plan="premium" highlighted />
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto items-center">
+            <div className="md:pr-4">
+              <PricingCard plan="free" />
+            </div>
+            <div className="transform md:scale-110 relative z-10">
+              <PricingCard plan="premium" highlighted />
+            </div>
           </div>
 
           <p className="text-center text-sm text-muted-foreground">

@@ -8,7 +8,7 @@ export function NextStepSection() {
       <div className="container px-4 md:px-6 max-w-2xl mx-auto text-center space-y-8">
         <div className="space-y-4">
           <h2 className="text-2xl md:text-3xl font-extrabold font-heading tracking-tight">
-            🚀 Sudah Tahu Kemampuan Kamu?
+            Sudah Tahu Kemampuan Kamu?
           </h2>
           <p className="text-muted-foreground leading-relaxed">
             Kalau ingin melanjutkan latihan, kamu bisa mencoba tryout dengan

@@ -8,7 +8,7 @@ import paymentRoutes from './routes/payment/index.js'
 import adminRoutes from './routes/admin/index.js'
 import userRoutes from './routes/user/index.js'
 
-const app: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const app: FastifyPluginAsync = async (fastify): Promise<void> => {
   // CORS
   await fastify.register(cors, {
     origin: '*' // update for production
@@ -25,7 +25,7 @@ const app: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   await fastify.register(adminRoutes, { prefix: '/api/admin' })
   await fastify.register(userRoutes, { prefix: '/api/user' })
 
-  fastify.get('/', async function (request, reply) {
+  fastify.get('/', async function () {
     return { status: 'epstopik API is running' }
   })
 }

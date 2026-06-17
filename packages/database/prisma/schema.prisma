@@ -50,6 +50,7 @@ model Question {
   options       String[]     // Array of options
   correctAnswer Int          // Index of correct option
   explanation   String?
+  websiteId     String       @default("epstopik")
   quizzes       Quiz[]       @relation("QuizToQuestion")
 }
 
@@ -63,6 +64,7 @@ model Quiz {
   status      String     @default("Draft")
   questions   Question[] @relation("QuizToQuestion")
   results     Result[]
+  websiteId   String     @default("epstopik")
   createdAt   DateTime   @default(now())
 }
 
@@ -96,6 +98,7 @@ model Materi {
   category    String
   fileUrl     String?  // Untuk link dokumen/video eksternal
   isPremium   Boolean  @default(false)
+  websiteId   String   @default("epstopik")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -106,6 +109,7 @@ model Kosakata {
   meaning     String
   category    String
   exampleSent String?  // Contoh kalimat
+  websiteId   String   @default("epstopik")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -120,6 +124,7 @@ model Blog {
   metaDescription String?
   category        String?
   author          String?
+  websiteId       String   @default("epstopik")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }

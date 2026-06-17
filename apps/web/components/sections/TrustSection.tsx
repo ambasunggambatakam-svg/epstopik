@@ -46,10 +46,22 @@ export function TrustSection() {
         </div>
 
         {/* Social proof */}
-        <div className="pt-4">
-          <p className="text-sm text-muted-foreground">
-            ✨ Digunakan oleh calon peserta EPS-TOPIK dari seluruh Indonesia
-          </p>
+        <div className="pt-8 border-t border-gray-100 flex flex-col items-center justify-center space-y-4">
+          <div className="w-full max-w-sm aspect-video bg-gray-100 rounded-lg flex items-center justify-center border border-dashed border-gray-300">
+            <span className="text-sm text-gray-400">Placeholder: Gambar pria AI di Korea</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-8 h-8 rounded-full bg-primary/20 border-2 border-white flex items-center justify-center text-[10px] font-bold text-primary">
+                  P
+                </div>
+              ))}
+            </div>
+            <p className="text-sm font-semibold text-muted-foreground">
+              Bergabung bersama <span className="text-primary font-bold">12.400+</span> peserta lainnya
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -383,31 +383,16 @@ function ResultView({
   const getScenario = () => {
     if (percentage < 50) {
       return {
-        prediction: "Sangat Rendah (10–30%)",
-        predictionColor: "text-destructive",
-        predictionBg: "bg-red-50 border-red-200",
-        conclusion:
-          "Kamu masih jauh dari standar ujian EPS-TOPIK. Kalau tidak segera diperbaiki, kemungkinan besar kamu akan gagal saat ujian.",
-        push: "Kamu perlu latihan intensif. Mulai dari dasar dan bangun kemampuan secara bertahap.",
+        conclusion: "Kamu masih jauh dari standar kelulusan. Mulai dari dasar dan bangun kemampuan secara bertahap.",
       };
     }
     if (percentage < 80) {
       return {
-        prediction: "Sedang (40–60%)",
-        predictionColor: "text-warning",
-        predictionBg: "bg-amber-50 border-amber-200",
-        conclusion:
-          "Kamu sudah punya peluang, tapi belum stabil. Sedikit peningkatan saja bisa membuat kamu benar-benar LULUS.",
-        push: "Kamu hampir lolos — ini zona paling krusial. Banyak peserta berhenti di level ini dan akhirnya gagal.",
+        conclusion: "Kamu sudah punya dasar, tapi belum cukup untuk lulus EPS-TOPIK. Terus tingkatkan belajarmu!",
       };
     }
     return {
-      prediction: "Tinggi (70–90%)",
-      predictionColor: "text-success",
-      predictionBg: "bg-green-50 border-green-200",
-      conclusion:
-        "Kamu hampir siap menghadapi ujian EPS-TOPIK, tapi tetap perlu mencoba simulasi ujian real untuk memastikan.",
-      push: "Tinggal sedikit lagi! Dengan latihan konsisten, peluang kamu sangat besar.",
+      conclusion: "Luar biasa! Kamu sudah sangat siap menghadapi ujian EPS-TOPIK yang sebenarnya.",
     };
   };
 
@@ -424,140 +409,80 @@ function ResultView({
             / {total}
           </span>
         </div>
-        <ProgressBar
-          value={percentage}
-          size="lg"
-          color={percentage >= 80 ? "success" : percentage >= 50 ? "warning" : "destructive"}
-          showLabel
-        />
-        <Badge level={level} size="lg" animated />
+        <div className="pt-2">
+          <p className="text-lg font-medium text-gray-700">Level: <span className="font-bold text-primary">{level}</span></p>
+        </div>
       </div>
 
       {/* 2. ANALYSIS */}
-      <div className="bg-white rounded-2xl border shadow-lg p-8 space-y-4">
-        <div className="flex items-center gap-2 font-bold text-lg font-heading">
-          <BarChart3 className="h-5 w-5 text-primary" /> Analisis Kemampuan
+      <div className="bg-white rounded-2xl border shadow-lg p-8 space-y-6">
+        <div className="flex items-center gap-2 font-bold text-xl font-heading mb-2">
+          📊 Analisis
         </div>
-        <div className="space-y-3">
+        
+        <div className="space-y-4">
           {Object.entries(categoryScores).map(([cat, data]) => {
             const catPercent = Math.round((data.correct / data.total) * 100);
             const isGood = catPercent >= 60;
+            let statusText = "";
+            if (cat === "vocabulary") statusText = "Lumayan";
+            if (cat === "grammar") statusText = "Lemah";
+            if (cat === "listening") statusText = "Perlu latihan";
+            if (cat === "reading") statusText = "Perlu latihan";
+            
             return (
               <div
                 key={cat}
-                className="flex items-center justify-between p-4 rounded-xl bg-gray-50"
+                className="flex items-center gap-3 text-lg"
               >
-                <div className="flex items-center gap-3">
-                  {isGood ? (
-                    <CheckCircle2 className="h-5 w-5 text-success" />
-                  ) : (
-                    <XCircle className="h-5 w-5 text-destructive" />
-                  )}
-                  <span className="font-medium capitalize">{cat}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-muted-foreground">
-                    {data.correct}/{data.total}
-                  </span>
-                  <span
-                    className={`text-sm font-bold ${isGood ? "text-success" : "text-destructive"}`}
-                  >
-                    {catPercent}%
-                  </span>
-                </div>
+                {isGood ? (
+                  <span className="text-success font-bold">✔</span>
+                ) : (
+                  <span className="text-destructive font-bold">❌</span>
+                )}
+                <span className="font-medium capitalize">{cat}:</span>
+                <span className="text-gray-700">{statusText}</span>
               </div>
             );
           })}
         </div>
-      </div>
 
-      {/* 3. PREDICTION */}
-      <div
-        className={`rounded-2xl border-2 p-6 ${scenario.predictionBg}`}
-      >
-        <div className="flex items-start gap-3">
-          <AlertTriangle className={`h-6 w-6 shrink-0 mt-0.5 ${scenario.predictionColor}`} />
-          <div className="space-y-2">
-            <h3 className="font-bold font-heading">
-              🎯 Prediksi Peluang Lulus
-            </h3>
-            <p className={`text-lg font-extrabold ${scenario.predictionColor}`}>
-              {scenario.prediction}
-            </p>
-            <p className="text-sm text-muted-foreground">{scenario.push}</p>
-          </div>
+        <div className="pt-4 border-t border-gray-100">
+          <p className="text-lg text-gray-700 leading-relaxed font-medium">
+            {scenario.conclusion}
+          </p>
         </div>
       </div>
 
-      {/* 4. CONCLUSION */}
-      <div className="rounded-2xl border-2 border-amber-200 bg-amber-50 p-6">
-        <p className="font-semibold mb-1">⚠️ Kesimpulan</p>
-        <p className="text-sm text-muted-foreground italic leading-relaxed">
-          {scenario.conclusion}
-        </p>
-      </div>
-
-      {/* 5. CTA */}
-      <div className="space-y-3">
-        {/* Primary CTA - Product */}
-        <Button
-          size="xl"
-          className="w-full shadow-lg shadow-primary/20 btn-ripple"
-          asChild
+      {/* 3. CTA */}
+      <div className="bg-white rounded-2xl border shadow-lg p-8 text-center space-y-6">
+        <h3 className="text-xl font-bold text-gray-900">
+          🔥 Mau tahu peluang kamu lulus?
+        </h3>
+        
+        <Link 
+          href="https://wa.me/xxxxxxxxxx" 
+          target="_blank"
+          className="inline-flex w-full md:w-auto items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white text-lg font-bold py-4 px-8 rounded-xl shadow-lg transition-all hover:-translate-y-1"
         >
-          <Link href="/tryout">
-            <ArrowRight className="mr-2 h-5 w-5" />
-            Lanjut Simulasi Lengkap
-          </Link>
-        </Button>
-
-        {/* Secondary actions */}
-        <div className="grid grid-cols-2 gap-3">
-          <Button
-            variant="outline"
-            size="lg"
-            className="w-full"
-            onClick={onRestart}
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Coba Lagi
-          </Button>
-          <Button variant="outline" size="lg" className="w-full" asChild>
-            <Link href="/#tools">Lihat Tools Lain</Link>
-          </Button>
-        </div>
-
-        {/* Optional WA CTA (small, not dominant) */}
-        <div className="text-center pt-2">
-          <Link
-            href="https://wa.me/xxxxxxxxxx"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <MessageSquare className="h-4 w-4" />
-            Gabung WhatsApp Channel untuk update soal
-          </Link>
-        </div>
+          👉 Gabung WhatsApp Channel
+        </Link>
       </div>
 
-      {/* Related Tools */}
-      <div className="bg-white rounded-2xl border shadow-sm p-6 space-y-4">
-        <h4 className="font-bold font-heading text-sm">
-          📚 Latihan Terkait
-        </h4>
-        <div className="grid gap-2">
-          {["Latihan Vocabulary TOPIK", "Latihan Grammar TOPIK", "Latihan TOPIK Level 2"].map(
-            (tool) => (
-              <Link
-                key={tool}
-                href="/tryout"
-                className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors group"
-              >
-                <span className="text-sm font-medium">{tool}</span>
-                <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-              </Link>
-            )
-          )}
-        </div>
+      {/* Secondary actions */}
+      <div className="grid grid-cols-2 gap-3 pt-4">
+        <Button
+          variant="outline"
+          size="lg"
+          className="w-full"
+          onClick={onRestart}
+        >
+          <RotateCcw className="mr-2 h-4 w-4" />
+          Coba Lagi
+        </Button>
+        <Button variant="outline" size="lg" className="w-full" asChild>
+          <Link href="/#tools">Lihat Tools Lain</Link>
+        </Button>
       </div>
     </div>
   );

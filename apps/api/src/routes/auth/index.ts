@@ -2,7 +2,7 @@ import { FastifyPluginAsync } from 'fastify'
 import { z } from 'zod'
 import bcrypt from 'bcrypt'
 
-const authRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const authRoutes: FastifyPluginAsync = async (fastify): Promise<void> => {
   
   fastify.post('/register', async function (request, reply) {
     const bodySchema = z.object({

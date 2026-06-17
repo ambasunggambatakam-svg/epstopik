@@ -111,6 +111,13 @@ export default function UserDashboard() {
                   {user?.role === 'ADMIN' ? 'ADMINISTRATOR' : user?.role || 'FREE'}
                 </div>
               </div>
+
+              {user?.role === 'PREMIUM' && (
+                <div className="mb-4 text-sm text-gray-700 bg-white p-3 rounded-lg border border-primary/20">
+                  <span className="block font-medium mb-1">Masa Aktif Premium:</span>
+                  <span className="font-bold text-primary">Sampai dengan {new Date(new Date().setDate(new Date().getDate() + 30)).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                </div>
+              )}
               
               {user?.role !== 'PREMIUM' && user?.role !== 'ADMIN' && (
                 <>

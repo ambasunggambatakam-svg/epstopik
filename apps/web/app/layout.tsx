@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import { FloatingWhatsApp } from "../components/FloatingWhatsApp";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,7 +45,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={`${inter.variable} ${poppins.variable}`}>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        {children}
+        <FloatingWhatsApp />
+      </body>
     </html>
   );
 }

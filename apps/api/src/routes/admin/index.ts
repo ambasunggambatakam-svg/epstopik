@@ -1,7 +1,7 @@
 import { FastifyPluginAsync } from 'fastify'
 import { z } from 'zod'
 
-const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const adminRoutes: FastifyPluginAsync = async (fastify): Promise<void> => {
   
   // Middleware to ensure user is authenticated and has ADMIN role
   fastify.addHook('onRequest', async (request, reply) => {
@@ -16,7 +16,7 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // GET /api/admin/users
-  fastify.get('/users', async function (request, reply) {
+  fastify.get('/users', async function () {
     const users = await fastify.prisma.user.findMany({
       select: {
         id: true,
@@ -30,7 +30,7 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // PUT /api/admin/users/:id
-  fastify.put('/users/:id', async function (request, reply) {
+  fastify.put('/users/:id', async function (request) {
     const { id } = request.params as { id: string }
     const bodySchema = z.object({
       role: z.enum(['GUEST', 'FREE', 'PREMIUM', 'ADMIN'])
@@ -45,14 +45,14 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // DELETE /api/admin/users/:id
-  fastify.delete('/users/:id', async function (request, reply) {
+  fastify.delete('/users/:id', async function (request) {
     const { id } = request.params as { id: string }
     await fastify.prisma.user.delete({ where: { id } })
     return { success: true }
   })
 
   // GET /api/admin/questions
-  fastify.get('/questions', async function (request, reply) {
+  fastify.get('/questions', async function () {
     const questions = await fastify.prisma.question.findMany({
       orderBy: { id: 'desc' }
     })
@@ -60,7 +60,7 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // POST /api/admin/questions
-  fastify.post('/questions', async function (request, reply) {
+  fastify.post('/questions', async function (request) {
     const bodySchema = z.object({
       type: z.enum(['READING', 'LISTENING']),
       content: z.string(),
@@ -78,7 +78,7 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // PUT /api/admin/questions/:id
-  fastify.put('/questions/:id', async function (request, reply) {
+  fastify.put('/questions/:id', async function (request) {
     const { id } = request.params as { id: string }
     const bodySchema = z.object({
       type: z.enum(['READING', 'LISTENING']).optional(),
@@ -97,14 +97,14 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // DELETE /api/admin/questions/:id
-  fastify.delete('/questions/:id', async function (request, reply) {
+  fastify.delete('/questions/:id', async function (request) {
     const { id } = request.params as { id: string }
     await fastify.prisma.question.delete({ where: { id } })
     return { success: true }
   })
 
   // POST /api/admin/materi
-  fastify.post('/materi', async function (request, reply) {
+  fastify.post('/materi', async function (request) {
     const bodySchema = z.object({
       title: z.string(),
       content: z.string(),
@@ -118,7 +118,7 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // POST /api/admin/kosakata
-  fastify.post('/kosakata', async function (request, reply) {
+  fastify.post('/kosakata', async function (request) {
     const bodySchema = z.object({
       korean: z.string(),
       meaning: z.string(),
@@ -132,7 +132,7 @@ const adminRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => 
   })
 
   // POST /api/admin/blog
-  fastify.post('/blog', async function (request, reply) {
+  fastify.post('/blog', async function (request) {
     const bodySchema = z.object({
       title: z.string(),
       slug: z.string(),

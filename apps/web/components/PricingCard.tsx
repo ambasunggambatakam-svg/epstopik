@@ -13,7 +13,17 @@ interface PricingCardProps {
 export function PricingCard({ plan, highlighted }: PricingCardProps) {
   const [loading, setLoading] = useState(false);
 
-  const plans = {
+  type PlanType = {
+    name: string;
+    price: string;
+    period?: string;
+    description: string;
+    features: string[];
+    buttonText: string;
+    buttonAction?: string;
+  };
+
+  const plans: Record<"free" | "premium", PlanType> = {
     free: {
       name: "Basic Free",
       price: "Rp 0",
@@ -115,7 +125,7 @@ export function PricingCard({ plan, highlighted }: PricingCardProps) {
               className="w-full h-14 text-lg font-bold rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-900 border-none"
               asChild
             >
-              <Link href={currentPlan.buttonAction}>{currentPlan.buttonText}</Link>
+              <Link href={currentPlan.buttonAction || "#"}>{currentPlan.buttonText}</Link>
             </Button>
           ) : (
             <Button

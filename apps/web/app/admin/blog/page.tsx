@@ -201,7 +201,7 @@ export default function AdminBlogPage() {
                           <FileText className="w-4 h-4 text-primary" />
                           {b.title}
                         </div>
-                        <div className="text-xs text-gray-500 mt-1">/{b.slug}</div>
+                        <div className="text-xs text-gray-500 mt-1">{"/" + b.slug}</div>
                       </td>
                       <td className="px-6 py-4">
                         <span className="px-2 py-1 bg-gray-100 rounded-md text-xs font-medium text-gray-600">{b.category || '-'}</span>

@@ -111,7 +111,7 @@ export default function AdminBlogPage() {
       setIsAdding(false);
       setEditingId(null);
       setIsPreview(false);
-      setNewData({ title: "", slug: "", content: "", imageUrl: "", category: "", author: "" });
+      setNewData({ title: "", slug: "", content: "", imageUrl: "", category: "", author: "", metaTitle: "", metaDescription: "", keyword: "", canonicalUrl: "" });
     } catch (err: any) {
       alert("Gagal menyimpan: " + err.message);
     }
@@ -140,9 +140,8 @@ export default function AdminBlogPage() {
     setIsAdding(true);
   };
 
-  // Helper to generate slug from title
   const generateSlug = (title: string) => {
-    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    const slug = title.toLowerCase().replace(new RegExp("[^a-z0-9]+", "g"), '-').replace(new RegExp("(^-|-$)+", "g"), '');
     setNewData({ ...newData, title, slug });
   };
 
@@ -238,7 +237,7 @@ export default function AdminBlogPage() {
         )}
       </div>
 
-      {/* Editor (Flat Layout) */}
+
       {isAdding && (
         <div className="mt-6 animate-fade-in">
           <div className="bg-white rounded-2xl w-full flex flex-col shadow-sm border overflow-hidden">
@@ -390,7 +389,6 @@ export default function AdminBlogPage() {
               </div>
             </div>
           </div>
-        </div>
       )}
     </>
   );
